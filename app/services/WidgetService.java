@@ -51,4 +51,9 @@ public class WidgetService {
         return widgets;
     }
 
+    public static void putWidget(Widget w) {
+        Map<String, AttributeValue> item = w.toDynamoMap();
+        DynamoDBService.putItem(TABLE_NAME, item);
+    }
+
 }
