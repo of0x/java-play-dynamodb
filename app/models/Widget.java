@@ -11,6 +11,10 @@ public class Widget {
     private String description;
     private Integer price;
 
+    public Widget() {
+        //required default constructor
+    }
+
     public Widget(String name, String description, Integer price) {
         this.name = name;
         this.description = description;
