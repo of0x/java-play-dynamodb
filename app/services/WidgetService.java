@@ -1,20 +1,25 @@
 package services;
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.model.ScanResult;
+import models.Widget;
+
+import play.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import models.Widget;
-
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import com.amazonaws.services.dynamodbv2.model.ScanResult;
-
 public class WidgetService {
 
     private static final String TABLE_NAME = "widgets";
-    
+    private static final String KEY = "name";
+
+
     private static final List<Widget> widgets = new ArrayList<Widget>();
 
+    /*
     static {
         // TODO: check for pre-existing table instead of generic exception handling
         try {
@@ -38,6 +43,23 @@ public class WidgetService {
         widgets.add(w2);
         item = w2.toDynamoMap();
         DynamoDBService.putItem(TABLE_NAME, item);
+    }
+    */
+
+    public static void createWidgetsTable() {
+        try {
+            DynamoDBService.createTable(TABLE_NAME, KEY);
+        } catch (AmazonServiceException ase) {
+            if (ase.getErrorCode().equalsIgnoreCase("ResourceNotFoundException") == false) {
+                throw ase;
+            } else {
+                Logger.warn("Create table returned: "+ase.getErrorCode()+" ,table "+TABLE_NAME+" may already exist");
+            }
+        }
+    }
+
+    public static void dropWidgetsTable() {
+            DynamoDBService.dropTable(TABLE_NAME);
     }
 
     public static List<Widget> getWidgets() {
