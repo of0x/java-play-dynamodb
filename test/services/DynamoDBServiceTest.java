@@ -7,7 +7,9 @@ import java.util.Map;
 
 import models.Widget;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.amazonaws.AmazonClientException;
@@ -18,6 +20,16 @@ import com.amazonaws.services.dynamodbv2.model.Condition;
 import com.amazonaws.services.dynamodbv2.model.ScanResult;
 
 public class DynamoDBServiceTest {
+
+    @Before
+    public void setUp() {
+        WidgetService.createWidgetsTable();
+    }
+
+    @After
+    public void tearDown() {
+        WidgetService.dropWidgetsTable();
+    }
 
     @Test
     public void test() {
