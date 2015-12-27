@@ -1,7 +1,12 @@
 @(message: String)
 
-@main("Welcome to Play") {
+@main("Welcome to Play (with widgets)") {
 
-    @play20.welcome(message, style = "Java")
+    <form action="@routes.Application.addWidget()" method="post">
+        <input type="text" name="name" />
+        <input type="text" name="description" />
+        <input type="text" name="price" />
+        <button>Add Widget</button>
+    </form>
 
 }
