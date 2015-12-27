@@ -6,7 +6,7 @@ libraryDependencies ++= Seq(
   javaJdbc,
   javaEbean,
   cache,
-  "com.amazonaws" % "aws-java-sdk" % "1.6.12"
+  "com.amazonaws" % "aws-java-sdk" % "1.9.6"
 )     
 
 play.Project.playJavaSettings
