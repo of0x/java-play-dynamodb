@@ -19,32 +19,10 @@ public class WidgetService {
 
     private static final List<Widget> widgets = new ArrayList<Widget>();
 
-    /*
     static {
-        // TODO: check for pre-existing table instead of generic exception handling
-        try {
-            DynamoDBService.createTable("widgets", "name");
-        }
-        catch (Exception e) {
-        }
-
-        // Wait for it to become active
-        DynamoDBService.waitForTableToBecomeAvailable(TABLE_NAME);
-
-        // Describe our new table
-        DynamoDBService.describeTable(TABLE_NAME);
-
-        Widget w1 = new Widget("w1", "widget1", 1);
-        widgets.add(w1);
-        Map<String, AttributeValue> item = w1.toDynamoMap();
-        DynamoDBService.putItem(TABLE_NAME, item);
-
-        Widget w2 = new Widget("w2", "widget2", 2);
-        widgets.add(w2);
-        item = w2.toDynamoMap();
-        DynamoDBService.putItem(TABLE_NAME, item);
+        createWidgetsTable();
     }
-    */
+
 
     public static void createWidgetsTable() {
         try {
