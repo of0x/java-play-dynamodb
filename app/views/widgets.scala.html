@@ -1,5 +1,5 @@
 @(widgets: List[Widget])
-
+<h1>Widgets</h1>
 <ul> 
   @for(widget <- widgets) {
     <li>@widget.getName() @widget.getDescription() @widget.getPrice()</li>

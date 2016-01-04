@@ -11,3 +11,7 @@ POST    /widget                     controllers.Application.addWidget()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 GET     /widgets                    controllers.Application.widgets()
+
+GET     /api/widget/summary         controllers.Application.summary()
+
+PUT     /api/widget                 controllers.Application.put()

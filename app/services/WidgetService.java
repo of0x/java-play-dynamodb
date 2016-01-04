@@ -28,7 +28,7 @@ public class WidgetService {
         try {
             DynamoDBService.createTable(TABLE_NAME, KEY);
         } catch (AmazonServiceException ase) {
-            if (ase.getErrorCode().equalsIgnoreCase("ResourceNotFoundException") == false) {
+            if (ase.getErrorCode().equalsIgnoreCase("ResourceInUseException") == false) {
                 throw ase;
             } else {
                 Logger.warn("Create table returned: "+ase.getErrorCode()+" ,table "+TABLE_NAME+" may already exist");
@@ -52,7 +52,7 @@ public class WidgetService {
     }
 
     public static void putWidget(Widget w) {
-        Map<String, AttributeValue> item = w.toDynamoMap();
+        Map<String, AttributeValue> item = w.toDynamoDBMap();
         DynamoDBService.putItem(TABLE_NAME, item);
     }
 

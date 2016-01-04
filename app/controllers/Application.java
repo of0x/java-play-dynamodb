@@ -2,8 +2,10 @@ package controllers;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import models.Widget;
 import play.data.Form;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 import services.WidgetService;
@@ -27,4 +29,29 @@ public class Application extends Controller {
         return redirect(routes.Application.widgets());
     }
 
+
+    public static Result summary() {
+        List<Widget> widgets = WidgetService.getWidgets();
+        return ok(Widget.jsonlist(widgets));
+    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public static Result put() {
+        JsonNode json = request().body().asJson();
+        if(json == null) {
+            return badRequest("Expecting Json data");
+        }
+
+        try {
+            String name = json.findPath("name").textValue();
+            String desc = json.findPath("description").textValue();
+            Integer price = json.findPath("price").asInt();
+            Widget widget = new Widget(name, desc, price);
+            WidgetService.putWidget(widget);
+            response().setHeader(ETAG, name);
+        } catch (Exception ex) {
+            return  badRequest("Failed to put");
+        }
+        return ok();
+    }
 }

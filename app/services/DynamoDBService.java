@@ -23,7 +23,7 @@ public class DynamoDBService {
 
     static {
         dynamoDB = new AmazonDynamoDBClient(new BasicAWSCredentials("", ""));
-        dynamoDB.setEndpoint("http://localhost:8000");
+        dynamoDB.setEndpoint("http://localhost:42753");
     }
 
     public static void createTable(String tableName, String primaryKeyAttributeName) {

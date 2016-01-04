@@ -52,12 +52,12 @@ public class DynamoDBServiceTest {
 
             // Add an item
             Widget w1 = new Widget("w1", "widget1", 1);
-            Map<String, AttributeValue> item = w1.toDynamoMap();
+            Map<String, AttributeValue> item = w1.toDynamoDBMap();
             DynamoDBService.putItem(tableName, item);
 
             // Add another item
             Widget w2 = new Widget("w2", "widget2", 2);
-            item = w2.toDynamoMap();
+            item = w2.toDynamoDBMap();
             DynamoDBService.putItem(tableName, item);
 
             // Scan for widgets with a price attribute greater than 1
